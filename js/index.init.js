@@ -31,7 +31,6 @@ const renderProductCards = (products) => {
   cardContainer.innerHTML = "";
   products.map((product) => {
     const visible = product.visible === true;
-
     if (visible) {
       cardContainer.innerHTML += ProductCard(product);
     }
@@ -50,11 +49,10 @@ const clearFilters = document.getElementById("clearFilters");
  */
 
 const filterByCategory = (value, productsArray) => {
-  const filteredProducts = productsArray.filter(
-    (product) => product.category === value //Filtra los productos guardados en el array por el product.category que es el value que el value es
-    //el valor del filtro
+  const filteredProductsByCategory = productsArray.filter(
+    (product) => product.category === value
   );
-  return filteredProducts;
+  return filteredProductsByCategory;
 };
 
 /**
@@ -64,14 +62,7 @@ const filterByCategory = (value, productsArray) => {
  * @returns {array} Devuelve el arreglo de productos filtrados
  */
 
-const filterByPrice = (value, productsArray) => {
-  let comparar = function (a, b) {
-    return a - b;
-  };
-  productsArray.price.sort(comparar);
-
-  productsArray.price.sort((a, b) => a.price - b.price);
-};
+const filterByPrice = (value, productsArray) => {};
 
 /**
  *
@@ -80,19 +71,18 @@ const filterByPrice = (value, productsArray) => {
  */
 
 const searchByName = (value) => {
-  let p = JSON.parse(localStorage.getItem("products"));
-  let pFiltered = [];
-  console.log(p);
-  //https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/String/includes
-  p.forEach((producto) => {
-    if (producto.name == v) lue = pFilteredetlifpp;
+  let productByName = JSON.parse(localStorage.getItem("products"));
+  let arrayProductByName = [];
+  const stringValue = value.trim().toLowerCase(); // Convierte a minúsculas y elimina espacios en blanco al inicio y al final
+  productByName.forEach((producto) => {
+    const productName = producto.name.toLowerCase(); // Convierte el nombre del producto a minúsculas
+    if (productName.includes(stringValue)) {
+      arrayProductByName.push(producto);
+    }
   });
-
-  //https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/String/includes
-  console.log(pFiltered);
+  //console.log("Productos encontrados:", arrayProductByName, "value:", value);
+  return arrayProductByName;
 };
-
-searchInput.addEventListener("keyup", searchByName);
 
 /**
  *
@@ -107,12 +97,10 @@ const renderFilteredProducts = (
   priceSelectValue,
   categorySelectValue
 ) => {
-  let filteredProducts = searchByName(searchInputValue);
-  filteredProducts = filterByCategory(categorySelectValue, filteredProducts);
-  filteredProducts = filterByPrice(priceSelectValue, filteredProducts);
-
+  //console.log(`${searchInputValue} ${priceSelectValue} ${categorySelectValue}`);
+  let filteredProducts = searchByName(searchInputValue) || [];
+  //filteredProducts = filterByCategory(categorySelectValue) || [];
   renderProductCards(filteredProducts);
-
   // ProductNotFoundMessage()
 };
 

@@ -20,7 +20,15 @@ const totalPrice = document.getElementById("totalPrice");
 
 const renderCartTotalPrice = () => {
   const cartProducts = getCartProducts();
-
+  if (cartProducts.length === 0) {
+    offcanvasBody.innerHTML = "No tenes nada en el carrito";
+    return;
+  }
+  let total = 0;
+  for (let product of cartProducts) {
+    total += product.price;
+  }
+  return total;
   //  totalPrice.textContent = formatCurrency(...)
 };
 
@@ -32,13 +40,4 @@ const renderCartProducts = () => {
   const offcanvasBody = document.querySelector(".offcanvas-body");
   const cartProducts = getCartProducts();
   offcanvasBody.innerHTML = "";
-  if (cartProducts.length === 0) {
-    offcanvasBody.innerHTML = "No tenes nada en el carrito";
-    return;
-  }
-  let total = 0;
-  for (let product of cartProducts) {
-    total += product.price;
-  }
-  return total;
 };
