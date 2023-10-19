@@ -49,10 +49,13 @@ const clearFilters = document.getElementById("clearFilters");
  */
 
 const filterByCategory = (value) => {
-  const filteredProductsByCategory = products.filter(
-    (product) => product.category === value
-  );
-  return filteredProductsByCategory;
+  if (value) {
+    const filteredProductsByCategory = products.filter(
+      (product) => product.category === value
+    );
+    return filteredProductsByCategory;
+  }
+  return productsArray;
 };
 
 /**
@@ -100,38 +103,47 @@ const renderFilteredProducts = (
   //let filteredProducts = searchByName(searchInputValue);
   let filteredProducts = filterByCategory(categorySelectValue); //filteredProducts);
   //filteredProducts = filterByPrice(priceSelectValue, filteredProducts);
-  renderProductCards(filteredProducts);
-  // ProductNotFoundMessage()
+  const renderFilteredProducts = (
+    searchInputValue,
+    priceSelectValue,
+    categorySelectValue
+  ) => {
+    let filteredProducts = searchByName(searchInputValue);
+    filteredProducts = filterByCategory(categorySelectValue, filteredProducts);
+    // filteredProducts = filterByPrice(priceSelectValue, filteredProducts) ;
+    renderProductCards(filteredProducts);
+    // ProductNotFoundMessage()
+  };
+
+  searchInput.addEventListener("keyup", (e) => {
+    renderFilteredProducts(
+      e.target.value.toLowerCase(),
+      priceSelect.value,
+      categorySelect.value
+    );
+  });
+
+  priceSelect.addEventListener("change", (e) => {
+    renderFilteredProducts(
+      searchInput.value,
+      e.target.value,
+      categorySelect.value
+    );
+  });
+
+  categorySelect.addEventListener("change", (e) => {
+    renderFilteredProducts(
+      searchInput.value,
+      priceSelect.value,
+      e.target.value.toLowerCase()
+    );
+  });
+
+  clearFilters.addEventListener("click", (e) => {
+    e.preventDefault();
+    searchInput.value = "";
+    priceSelect.value = "";
+    categorySelect.value = "";
+    renderProductCards(products);
+  });
 };
-
-searchInput.addEventListener("keyup", (e) => {
-  renderFilteredProducts(
-    e.target.value.toLowerCase(),
-    priceSelect.value,
-    categorySelect.value
-  );
-});
-
-priceSelect.addEventListener("change", (e) => {
-  renderFilteredProducts(
-    searchInput.value,
-    e.target.value,
-    categorySelect.value
-  );
-});
-
-categorySelect.addEventListener("change", (e) => {
-  renderFilteredProducts(
-    searchInput.value,
-    priceSelect.value,
-    e.target.value.toLowerCase()
-  );
-});
-
-clearFilters.addEventListener("click", (e) => {
-  e.preventDefault();
-  searchInput.value = "";
-  priceSelect.value = "";
-  categorySelect.value = "";
-  renderProductCards(products);
-});
