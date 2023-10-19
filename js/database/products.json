@@ -1,0 +1,102 @@
+[
+    {
+        "name" : "Botella deportiva de aluminio reutilizable",
+        "price" : 3100,
+        "discountPercentage": 10, 
+        "category" : "bottle",
+        "quantity": 1,
+        "visible": true,
+        "image": "https://rollingcodeschool.com/wp-content/uploads/2022/11/WhatsApp-Image-2022-11-22-at-18.45.49-500x500.jpeg",
+        "id": "6c03401c-6543-11ee-8c99-0242ac120002"
+    },
+    {
+        "name" : "Gorra Negra RollingCode",
+        "price" : 3200,
+        "discountPercentage": 15, 
+        "category" : "hat",
+        "quantity": 1,
+        "visible": true,
+        "image": "https://rollingcodeschool.com/wp-content/uploads/2023/06/20230623_155345-scaled.jpg",
+        "id": "6fe95464-6543-11ee-8c99-0242ac120002"
+    },
+    {
+        "name" : "Gorra Roja RollingCode",
+        "price" : 2500,
+        "discountPercentage": false, 
+        "category" : "hat",
+        "quantity": 1,
+        "visible": true,
+        "image": "https://rollingcodeschool.com/wp-content/uploads/2021/09/WhatsApp-Image-2021-11-03-at-11.15.45-AM-3.jpeg",
+        "id": "73d71674-6543-11ee-8c99-0242ac120002"
+    },
+    {
+        "name" : "Libreta",
+        "price" : 2000,
+        "discountPercentage": false, 
+        "category" : "notepad",
+        "quantity": 1,
+        "visible": true,
+        "image": "https://rollingcodeschool.com/wp-content/uploads/2021/11/WhatsApp-Image-2021-11-03-at-11.15.46-AM.jpeg",
+        "id": "7722d430-6543-11ee-8c99-0242ac120002"
+    }
+    ,   {
+        "name" : "Libreta/Anotador RollingCode Labs",
+        "price" : 3000,
+        "discountPercentage": 20, 
+        "category" : "notepad",
+        "quantity": 1,
+        "visible": true,
+        "image": "https://rollingcodeschool.com/wp-content/uploads/2023/06/20230622_162811-scaled.jpg",
+        "id": "7aa94bf2-6543-11ee-8c99-0242ac120002"
+    },
+    {
+        "name" : "Llaveros RollingCode",
+        "price" : 300,
+        "discountPercentage": false, 
+        "category" : "keychain",
+        "quantity": 1,
+        "visible": true,
+        "image": "https://rollingcodeschool.com/wp-content/uploads/2021/11/WhatsApp-Image-2021-11-03-at-11.25.08-AM.jpeg",
+        "id": "7d297bf4-6543-11ee-8c99-0242ac120002"
+    },
+    {
+        "name" : "Pines RollingCode BLANCO / NEGRO",
+        "price" : 800,
+        "discountPercentage": 15, 
+        "category" : "keychain",
+        "quantity": 1,
+        "visible": true,
+        "image": "https://rollingcodeschool.com/wp-content/uploads/2023/04/20230424_135552-scaled.jpg",
+        "id": "7f7829d2-6543-11ee-8c99-0242ac120002"
+    },
+    {
+        "name" : "Taza Coding",
+        "price" : 3200,
+        "discountPercentage": 25, 
+        "category" : "mug",
+        "quantity": 1,
+        "visible": true,
+        "image": "https://rollingcodeschool.com/wp-content/uploads/2021/09/WhatsApp-Image-2021-11-03-at-11.15.43-AM-2.jpeg",
+        "id": "81e8d130-6543-11ee-8c99-0242ac120002"
+    },
+    {
+        "name" : "Taza No connection",
+        "price" : 3200,
+        "discountPercentage": 25, 
+        "category" : "mug",
+        "quantity": 1,
+        "visible": true,
+        "image": "https://rollingcodeschool.com/wp-content/uploads/2021/09/WhatsApp-Image-2021-11-03-at-11.15.44-AM-1.jpeg",
+        "id": "841862ae-6543-11ee-8c99-0242ac120002"
+    }
+    ,   {
+        "name" : "Taza RollingCode Labs",
+        "price" : 3200,
+        "discountPercentage": 25, 
+        "category" : "mug",
+        "quantity": 1,
+        "visible": true,
+        "image": "https://rollingcodeschool.com/wp-content/uploads/2023/06/20230614_164115-scaled.jpg",
+        "id": "8682b31e-6543-11ee-8c99-0242ac120002"
+    }
+]
