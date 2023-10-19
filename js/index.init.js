@@ -48,8 +48,8 @@ const clearFilters = document.getElementById("clearFilters");
  * @returns {array} Devuelve el arreglo de productos filtrados
  */
 
-const filterByCategory = (value, productsArray) => {
-  const filteredProductsByCategory = productsArray.filter(
+const filterByCategory = (value) => {
+  const filteredProductsByCategory = products.filter(
     (product) => product.category === value
   );
   return filteredProductsByCategory;
@@ -71,10 +71,9 @@ const filterByPrice = (value, productsArray) => {};
  */
 
 const searchByName = (value) => {
-  let productByName = JSON.parse(localStorage.getItem("products"));
   let arrayProductByName = [];
   const stringValue = value.trim().toLowerCase(); // Convierte a minúsculas y elimina espacios en blanco al inicio y al final
-  productByName.forEach((producto) => {
+  products.forEach((producto) => {
     const productName = producto.name.toLowerCase(); // Convierte el nombre del producto a minúsculas
     if (productName.includes(stringValue)) {
       arrayProductByName.push(producto);
@@ -97,9 +96,10 @@ const renderFilteredProducts = (
   priceSelectValue,
   categorySelectValue
 ) => {
-  //console.log(`${searchInputValue} ${priceSelectValue} ${categorySelectValue}`);
-  let filteredProducts = searchByName(searchInputValue) || [];
-  //filteredProducts = filterByCategory(categorySelectValue) || [];
+  console.log(`${searchInputValue} ${priceSelectValue} ${categorySelectValue}`);
+  //let filteredProducts = searchByName(searchInputValue);
+  let filteredProducts = filterByCategory(categorySelectValue); //filteredProducts);
+  //filteredProducts = filterByPrice(priceSelectValue, filteredProducts);
   renderProductCards(filteredProducts);
   // ProductNotFoundMessage()
 };
