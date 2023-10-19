@@ -48,11 +48,14 @@ const clearFilters = document.getElementById("clearFilters");
  * @returns {array} Devuelve el arreglo de productos filtrados
  */
 
+
 const filterByCategory = (value, productsArray) => {
-  const filteredProductsByCategory = productsArray.filter(
-    (product) => product.category === value
-  );
-  return filteredProductsByCategory;
+  if(value){
+    const filteredProductsByCategory = productsArray.filter((product) => product.category === value);
+    return filteredProductsByCategory;
+  } 
+    return productsArray;
+  
 };
 
 /**
@@ -62,7 +65,9 @@ const filterByCategory = (value, productsArray) => {
  * @returns {array} Devuelve el arreglo de productos filtrados
  */
 
-const filterByPrice = (value, productsArray) => {};
+const filterByPrice = (value, productsArray) => {
+
+};
 
 /**
  *
@@ -71,10 +76,9 @@ const filterByPrice = (value, productsArray) => {};
  */
 
 const searchByName = (value) => {
-  let productByName = JSON.parse(localStorage.getItem("products"));
   let arrayProductByName = [];
   const stringValue = value.trim().toLowerCase(); // Convierte a minúsculas y elimina espacios en blanco al inicio y al final
-  productByName.forEach((producto) => {
+  products.forEach((producto) => {
     const productName = producto.name.toLowerCase(); // Convierte el nombre del producto a minúsculas
     if (productName.includes(stringValue)) {
       arrayProductByName.push(producto);
@@ -92,14 +96,10 @@ const searchByName = (value) => {
  * @returns Crea un arreglo de productos pasando por todos los filtros y llama a renderProductCards() para renderizarlas, en caso de no haber productos muestra ProductNotFoundMessage()
  */
 
-const renderFilteredProducts = (
-  searchInputValue,
-  priceSelectValue,
-  categorySelectValue
-) => {
-  //console.log(`${searchInputValue} ${priceSelectValue} ${categorySelectValue}`);
-  let filteredProducts = searchByName(searchInputValue) || [];
-  //filteredProducts = filterByCategory(categorySelectValue) || [];
+const renderFilteredProducts = (searchInputValue, priceSelectValue, categorySelectValue) => {
+   let filteredProducts = searchByName(searchInputValue);
+       filteredProducts = filterByCategory(categorySelectValue, filteredProducts);
+  // filteredProducts = filterByPrice(priceSelectValue, filteredProducts) ;
   renderProductCards(filteredProducts);
   // ProductNotFoundMessage()
 };
