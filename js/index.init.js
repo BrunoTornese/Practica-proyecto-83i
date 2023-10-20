@@ -66,6 +66,15 @@ const filterByCategory = (value, productsArray) => {
  */
 
 const filterByPrice = (value, productsArray) => {
+  console.log(value);
+  let price = [];
+  if(value){
+   productsArray.map((product)=>{
+     price.push(product);
+  })
+  console.log(price.sort((a,b)=>{return a.price-b.price}));
+  return price;
+}
 
 };
 
@@ -99,7 +108,7 @@ const searchByName = (value) => {
 const renderFilteredProducts = (searchInputValue, priceSelectValue, categorySelectValue) => {
    let filteredProducts = searchByName(searchInputValue);
        filteredProducts = filterByCategory(categorySelectValue, filteredProducts);
-  // filteredProducts = filterByPrice(priceSelectValue, filteredProducts) ;
+       filteredProducts = filterByPrice(priceSelectValue, filteredProducts);
   renderProductCards(filteredProducts);
   // ProductNotFoundMessage()
 };
