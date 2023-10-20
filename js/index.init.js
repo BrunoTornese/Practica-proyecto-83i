@@ -48,14 +48,14 @@ const clearFilters = document.getElementById("clearFilters");
  * @returns {array} Devuelve el arreglo de productos filtrados
  */
 
-
 const filterByCategory = (value, productsArray) => {
-  if(value){
-    const filteredProductsByCategory = productsArray.filter((product) => product.category === value);
+  if (value) {
+    const filteredProductsByCategory = productsArray.filter(
+      (product) => product.category === value
+    );
     return filteredProductsByCategory;
-  } 
-    return productsArray;
-  
+  }
+  return productsArray;
 };
 
 /**
@@ -68,14 +68,27 @@ const filterByCategory = (value, productsArray) => {
 const filterByPrice = (value, productsArray) => {
   console.log(value);
   let price = [];
-  if(value){
-   productsArray.map((product)=>{
-     price.push(product);
-  })
-  console.log(price.sort((a,b)=>{return a.price-b.price}));
-  return price;
-}
-
+  if (value === "asc") {
+    productsArray.map((product) => {
+      price.push(product);
+    });
+    return price;
+  }
+  if (value === "desc") {
+    productsArray.map((product) => {
+      price.push(product);
+    });
+    return price;
+  }
+  if (value === "disc") {
+    productsArray.map((product) => {
+      if (product.discountPercentage !== false) {
+        price.push(product);
+      }
+    });
+    return price;
+  }
+  return productsArray;
 };
 
 /**
@@ -86,6 +99,8 @@ const filterByPrice = (value, productsArray) => {
 
 const searchByName = (value) => {
   let arrayProductByName = [];
+  console.log(arrayProductByName);
+  console.log(arrayProductByName);
   const stringValue = value.trim().toLowerCase(); // Convierte a minúsculas y elimina espacios en blanco al inicio y al final
   products.forEach((producto) => {
     const productName = producto.name.toLowerCase(); // Convierte el nombre del producto a minúsculas
@@ -105,10 +120,15 @@ const searchByName = (value) => {
  * @returns Crea un arreglo de productos pasando por todos los filtros y llama a renderProductCards() para renderizarlas, en caso de no haber productos muestra ProductNotFoundMessage()
  */
 
-const renderFilteredProducts = (searchInputValue, priceSelectValue, categorySelectValue) => {
-   let filteredProducts = searchByName(searchInputValue);
-       filteredProducts = filterByCategory(categorySelectValue, filteredProducts);
-       filteredProducts = filterByPrice(priceSelectValue, filteredProducts);
+const renderFilteredProducts = (
+  searchInputValue,
+  priceSelectValue,
+  categorySelectValue
+) => {
+  console.log(searchByName);
+  let filteredProducts = searchByName(searchInputValue);
+  filteredProducts = filterByCategory(categorySelectValue, filteredProducts);
+  filteredProducts = filterByPrice(priceSelectValue, filteredProducts);
   renderProductCards(filteredProducts);
   // ProductNotFoundMessage()
 };
