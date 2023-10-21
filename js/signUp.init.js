@@ -86,18 +86,20 @@ const repeatPasswordFeedback = (password, repeatPassword) => {
  * @param {object} e Recibe el evento de submit del formulario
  * @returns Si la información del formulario es valida, debe registrar al usuario, logearlo, mostrar el modal de registro exitoso y redirigirlo a la página principal.
  */
-const signUpSubmit = (e) => {
+const signUpSubmit = async (e) => {
   e.preventDefault();
-  const isEmailValid = emailFeedback(signUpFormEmailInput.value);
-  const isPasswordValid = passwordFeedback(signUpFormPasswordInput.value);
-  const isRepeatPasswordValid = repeatPasswordFeedback(
+  const esEmailValido = emailFeedback(signUpFormEmailInput.value);
+  const esPasswordValido = passwordFeedback(signUpFormPasswordInput.value);
+  const esRepeatPasswordValido = repeatPasswordFeedback(
     signUpFormPasswordInput.value,
     signUpFormRepeatPassword.value
   );
-  if (isEmailValid && isPasswordValid && isRepeatPasswordValid) {
-    showSuccesfulSignUpModal();
+  if (esEmailValido && esPasswordValido && esRepeatPasswordValido) {
+    const email = signUpFormEmailInput.value;
+    const password = signUpFormPasswordInput.value;
+    createUser({ email, password });
+    setLoggedUser(email);
     redirectIndex();
   }
 };
-
 signUpForm.addEventListener("submit", signUpSubmit);
