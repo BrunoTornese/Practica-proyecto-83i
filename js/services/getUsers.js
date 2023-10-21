@@ -4,6 +4,10 @@
  */
 
 export const getUsers = () => {
-  const Users = localStorage.getItem(JSON.parse("users"));
-  return Users;
+  const usersString = localStorage.getItem("users");
+  if (usersString) {
+    return JSON.parse(usersString);
+  } else {
+    return [];
+  }
 };

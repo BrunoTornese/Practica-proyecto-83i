@@ -10,8 +10,8 @@ import { getUsers } from "./getUsers.js";
 
 export const createUser = ({ email, password }) => {
   if (email && password) {
-    const newUser = new User(email, password);
-    const usuariosExistentes = getUsers();
+    const newUser = new User({ email, password, role: "user" });
+    let usuariosExistentes = getUsers() || [];
     usuariosExistentes.push(newUser);
     localStorage.setItem("users", JSON.stringify(usuariosExistentes));
   }

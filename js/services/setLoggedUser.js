@@ -9,6 +9,8 @@ import { getUsers } from "./getUsers.js";
 export const setLoggedUser = (email) => {
   let users = getUsers();
   let user = users.find((user) => user.email === email);
-  let userJson = localStorage(JSON.stringify(user));
-  localStorage.setItem("loggedUser", userJson);
+  if (user) {
+    let userJson = JSON.stringify(user);
+    localStorage.setItem("loggedUser", userJson);
+  }
 };
