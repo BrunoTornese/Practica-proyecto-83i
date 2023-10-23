@@ -7,7 +7,6 @@ import { formatCurrency } from "./utils/formatCurrency.js";
  * @returns Renderiza los productos y el precio total en el offcanvas del carrito
  */
 export const renderCartBody = () => {
-  class renderCartProducts {}
   renderCartProducts();
   renderCartTotalPrice();
 };
@@ -20,18 +19,17 @@ const totalPrice = document.getElementById("totalPrice");
 
 const renderCartTotalPrice = () => {
   const cartProducts = getCartProducts();
-  if (cartProducts.length === 0) {
-    offcanvasBody.innerHTML = "No tenes nada en el carrito";
-    return;
-  }
-  let total = 0;
+  let totalPrice = 0;
   for (let product of cartProducts) {
-    total += product.price;
+    const discountedPrice = discountPrice(
+      product.price,
+      product.discountPercentage
+    );
+    totalPrice += discountedPrice;
   }
-  return total;
-  //  totalPrice.textContent = formatCurrency(...)
+  const totalPriceElement = document.getElementById("totalPrice");
+  totalPriceElement.textContent = formatCurrency(totalPrice);
 };
-
 /**
  * @returns {} Renderiza los productos en el carrito
  */
@@ -40,4 +38,15 @@ const renderCartProducts = () => {
   const offcanvasBody = document.querySelector(".offcanvas-body");
   const cartProducts = getCartProducts();
   offcanvasBody.innerHTML = "";
+
+  if (cartProducts.length === 0) {
+    offcanvasBody.innerHTML = "No tienes productos en el carrito";
+  } else {
+    let productCardsHTML = "";
+    cartProducts.forEach((product) => {
+      const productCard = ProductCardCart(product);
+      productCardsHTML += productCard;
+    });
+    offcanvasBody.innerHTML = productCardsHTML;
+  }
 };

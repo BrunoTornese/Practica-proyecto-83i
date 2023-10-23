@@ -22,20 +22,28 @@ const ProductCard = (product) => {
             <h5 class="card-title">${product.name}</h5>
             <div class="d-flex w-100">
               <p class="card-text text-decoration-line-through me-3">
-                ${discount ? `${formatCurrency(product.price)} <span class="badge bg-danger">-${product.discountPercentage}%</span>` : ""}
+                ${
+                  discount
+                    ? `${formatCurrency(
+                        product.price
+                      )} <span class="badge bg-danger">-${
+                        product.discountPercentage
+                      }%</span>`
+                    : ""
+                }
               </p>
               <p class="card-text">${formattedPrice}</p>
             </div>
-             <button class="btn btn-primary rounded rounded-5" onclick="addProductToCart('${product.id}')"><i class="bi bi-cart-plus"></i> Agregar al carrito </button>
+             <button class="btn btn-primary rounded rounded-5" onclick="addProductToCart('${
+               product.id
+             }')"><i class="bi bi-cart-plus"></i> Agregar al carrito </button>
           </div>
         </div>
       </div>
     </div>
-    `
+    `;
 };
 
-
-
-window.addProductToCart = addProductToCart
+window.addProductToCart = addProductToCart;
 
 export default ProductCard;

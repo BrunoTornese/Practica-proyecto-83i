@@ -14,30 +14,36 @@ showPasswordButton.addEventListener("click", (e) => {
   showPassword(e);
 });
 
-const loginForm = document.getElementById("loginForm")
-const invalidLoginFeedback = document.getElementById("invalidLoginFeedback")
+const loginForm = document.getElementById("loginForm");
+const invalidLoginFeedback = document.getElementById("invalidLoginFeedback");
 
+const userLoginFeedback = (bool) => {
+  invalidLoginFeedback.classList.add("hidden");
 
-const userLoginFeedback = (bool) =>{
-  invalidLoginFeedback.classList.add("hidden")
+  if (bool) {
+    return invalidLoginFeedback.classList.add("hidden");
+  }
 
-   if (bool) {
-    return  invalidLoginFeedback.classList.add("hidden")
-   }
-
-   invalidLoginFeedback.classList.remove("hidden")
-   return 
-}
+  invalidLoginFeedback.classList.remove("hidden");
+  return;
+};
 
 /**
- * 
+ *
  * @param {object} e Evento de submit del formulario de login
  * @returns Debe mostrar el feedback dependiendo de la validación del login, settearlo y redirigir al usuario a la página principal si este fue correcto.
  */
 
-const userLogin = (e) =>{
-  e.preventDefault()
-  
-}
+const userLogin = (e) => {
+  e.preventDefault();
+  let userValido = validateLoginUser(loginForm);
+  if (userValido) {
+    setLoggedUser(userValido.email);
+    userLoginFeedback(true);
+    redirectIndex();
+  } else {
+    userLoginFeedback(false);
+  }
+};
 
-loginForm.addEventListener("submit", userLogin)
+loginForm.addEventListener("submit", userLogin);

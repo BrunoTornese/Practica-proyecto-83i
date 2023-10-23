@@ -4,8 +4,8 @@ import { logout } from "../utils/logout.js";
 const header = document.querySelector("header");
 
 const Navbar = () => {
-  const loggedUser = getLoggedUser()
-    
+  const loggedUser = getLoggedUser();
+
   const renderCartButton = window.location.pathname == "/index.html";
 
   return (header.innerHTML = `
@@ -95,14 +95,14 @@ const Navbar = () => {
 };
 
 const logoutHandler = () => {
-  logout()
+  logout();
 };
 
-const renderCartBodyHandler = () =>{
-  renderCartBody()
-}
+const renderCartBodyHandler = () => {
+  renderCartBody();
+};
 
 window.logoutHandler = logoutHandler;
-window.renderCartBodyHandler = renderCartBodyHandler
+window.renderCartBodyHandler = renderCartBodyHandler;
 
 export default Navbar;
