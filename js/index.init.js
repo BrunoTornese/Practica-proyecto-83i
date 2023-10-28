@@ -14,8 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
   createAdminUser();
   setProducts();
   products = getProducts();
-  // renderCartBody()
-  // cartBadgeHandler()
+  renderCartBody();
+  cartBadgeHandler();
   renderProductCards(products);
 });
 
@@ -69,16 +69,16 @@ const filterByPrice = (value, productsArray) => {
   console.log(value);
   let price = [];
   if (value === "asc") {
-    productsArray.map((product) => {
-      price.push(product);
+    const sortedProducts = productsArray.sort((productA, productB) => {
+      return productA.price - productB.price;
     });
-    return price;
+    return sortedProducts;
   }
   if (value === "desc") {
-    productsArray.map((product) => {
-      price.push(product);
+    const sortedProducts = productsArray.sort((productA, productB) => {
+      return productB.price - productA.price;
     });
-    return price;
+    return sortedProducts;
   }
   if (value === "disc") {
     productsArray.map((product) => {
@@ -125,12 +125,15 @@ const renderFilteredProducts = (
   priceSelectValue,
   categorySelectValue
 ) => {
-  console.log(searchByName);
   let filteredProducts = searchByName(searchInputValue);
   filteredProducts = filterByCategory(categorySelectValue, filteredProducts);
   filteredProducts = filterByPrice(priceSelectValue, filteredProducts);
-  renderProductCards(filteredProducts);
-  // ProductNotFoundMessage()
+
+  if (filteredProducts.length === 0) {
+    cardContainer.innerHTML = ProductNotFoundMessage();
+  } else {
+    renderProductCards(filteredProducts);
+  }
 };
 
 searchInput.addEventListener("keyup", (e) => {

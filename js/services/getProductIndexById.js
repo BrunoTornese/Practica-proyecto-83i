@@ -8,4 +8,10 @@ import { getProducts } from "./getProducts.js";
 
 export const getProductIndexById = (id) => {
   const products = getProducts();
+  for (let i = 0; i < products.length; i++) {
+    if (products[i].id === id) {
+      return i;
+    }
+  }
+  return -1;
 };

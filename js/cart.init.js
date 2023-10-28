@@ -11,35 +11,47 @@ export const renderCartBody = () => {
   renderCartTotalPrice();
 };
 
-const totalPrice = document.getElementById("totalPrice");
+const totalPriceElement = document.getElementById("totalPrice");
 
 /**
- * @returns {} Renderiza la suma del precio de todos los productos en el carrito
+ * @returns Renderiza la suma del precio de todos los productos en el carrito
  */
 
 const renderCartTotalPrice = () => {
   const cartProducts = getCartProducts();
   let totalPrice = 0;
-  for (let product of cartProducts) {
-    const discountedPrice = discountPrice(
-      product.price,
-      product.discountPercentage
-    );
-    totalPrice += discountedPrice;
+  if (cartProducts.length === 0) {
+    totalPrice = 0;
+  } else {
+    cartProducts.forEach((product) => {
+      // Verifica si el producto tiene un descuento
+      if (typeof product.discountPercentage === "number") {
+        // Aplica el descuento al precio del producto
+        const discountedPrice = discountPrice(
+          product.price,
+          product.discountPercentage
+        );
+        // Agrega el precio descontado al precio total
+        totalPrice += discountedPrice * product.quantity;
+      } else {
+        // Si el producto no tiene descuento, agrega el precio original al precio total
+        totalPrice += product.price * product.quantity;
+      }
+    });
   }
-  const totalPriceElement = document.getElementById("totalPrice");
-  totalPriceElement.textContent = formatCurrency(totalPrice);
+  // Muestra el precio total en el elemento con el ID "totalPrice" en la interfaz.
+  totalPriceElement.textContent = formatCurrency(totalPrice); // Formatea y muestra el precio total en la interfaz
 };
+
 /**
  * @returns {} Renderiza los productos en el carrito
  */
 
 const renderCartProducts = () => {
   const offcanvasBody = document.querySelector(".offcanvas-body");
-  const cartProducts = getCartProducts();
+  const cartProducts = getCartProducts() || [];
   offcanvasBody.innerHTML = "";
-
-  if (cartProducts.length === 0) {
+  if (cartProducts.length == 0) {
     offcanvasBody.innerHTML = "No tienes productos en el carrito";
   } else {
     let productCardsHTML = "";

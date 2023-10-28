@@ -35,8 +35,13 @@ const TableRow = (product) => {
 const setVisibility = (id) => {
   const products = getProducts();
   const productIndex = getProductIndexById(id);
+  if (productIndex !== -1) {
+    // Verifica que el producto con el ID especificado existe.
+    products[productIndex].visible = isVisible; // Modifica la propiedad visible del producto.
+    setModifiedProducts(products); // Guarda los cambios en la lista de productos.
+    renderTableBody(products); // Renderiza la lista de productos con los cambios
+  }
 };
-
 window.setVisibility = setVisibility;
 
 export default TableRow;

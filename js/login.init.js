@@ -36,14 +36,13 @@ const userLoginFeedback = (bool) => {
 
 const userLogin = (e) => {
   e.preventDefault();
-  let userValido = validateLoginUser(loginForm);
-  if (userValido) {
-    setLoggedUser(userValido.email);
-    userLoginFeedback(true);
-    redirectIndex();
-  } else {
-    userLoginFeedback(false);
-  }
+  const email = loginForm.email.value;
+  const password = loginForm.password.value;
+  const validacion = validateLoginUser(email, password);
+  userLoginFeedback(validacion);
+  setLoggedUser(email);
+  redirectIndex();
+  return;
 };
 
 loginForm.addEventListener("submit", userLogin);

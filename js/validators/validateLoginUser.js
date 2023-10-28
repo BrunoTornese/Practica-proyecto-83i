@@ -7,12 +7,12 @@ import { getUsers } from "../services/getUsers.js";
  * @returns {bool} Devuelvue un booleano si las credenciales del usuario estan registradas.
  */
 
-export const validateLoginUser = ({ email, password }) => {
+export const validateLoginUser = (email, password) => {
   const users = getUsers();
-  for (const user of users) {
-    if (user.email === email && user.password === password) {
-      return true;
-    }
-  }
-  return false;
+
+  const isValidUser = users.some((user) => {
+    return email === user.email && password === user.password;
+  });
+
+  return isValidUser;
 };

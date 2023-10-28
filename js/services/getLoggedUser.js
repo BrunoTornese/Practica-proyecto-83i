@@ -4,10 +4,11 @@
  */
 
 export const getLoggedUser = () => {
-  const userLoged = localStorage.getItem("loggedUser");
-  if (userLoged) {
-    const user = JSON.parse(userLoged);
-    return user;
+  let loggedUserJson = localStorage.getItem("loggedUser");
+  if (loggedUserJson) {
+    let loggedUser = JSON.parse(loggedUserJson);
+    return loggedUser;
+  } else {
+    return null;
   }
-  return null;
 };

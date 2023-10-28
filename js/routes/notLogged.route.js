@@ -8,6 +8,6 @@ import { getLoggedUser } from "../services/getLoggedUser.js";
 export const notLoggedRoute = () => {
   let usuarioLog = getLoggedUser();
   if (!usuarioLog) {
-    window.location.href = ".../login.html";
+    window.location.href = "views/login.html";
   }
 };

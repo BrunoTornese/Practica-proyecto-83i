@@ -12,14 +12,38 @@ import { setCartProducts } from "./setCartProducts.js";
  */
 
 export const addProductToCart = (id) => {
-  let producto = getProductById(id);
-  let usuario = getLoggedUser();
-  if (usuario) {
-    let currentProducts = getCartProducts(usuario);
-    if (!currentProducts) {
-      currentProducts = [];
+  const user = getLoggedUser(); // Obtén el usuario autenticado
+  if (user) {
+    const userId = user.id;
+    // Si hay un usuario autenticado
+    let cartProducts = getCartProducts();
+    // Verifica si `cartProducts` es nulo o no es un arreglo válido
+    if (cartProducts === null || !Array.isArray(cartProducts)) {
+      cartProducts = []; // Inicializa cartProducts como un arreglo vacío si es nulo o no es un arreglo válido
     }
-    currentProducts.push(producto);
-    setCartProducts(usuario, currentProducts);
-  } else notLoggedRoute();
+    const product = getProductById(id); // Obtén el producto por su ID
+    if (cartProducts) {
+      // Si hay productos en el carrito
+      const productAlreadyInCart = cartProducts.find(
+        (cartProduct) => cartProduct.id === product.id
+      );
+      if (productAlreadyInCart) {
+        // Si el producto ya está en el carrito
+        productAlreadyInCart.quantity++; // Aumenta el atributo "quantity" del producto
+      } else {
+        // Si el producto no está en el carrito
+        cartProducts.push(product); // Agrega el producto al carrito
+      }
+    } else {
+      // Si no hay productos en el carrito
+      cartProducts.push(product); // Agrega el producto al carrito
+    }
+    localStorage.setItem(`${userId}`, JSON.stringify(cartProducts)); // Guarda el carrito de productos en el localStorage
+    cartBadgeHandler(cartProducts.length); // Aumenta el badge del carrito
+    setCartProducts(cartProducts); // Agrega el producto al carrito
+    return cartProducts;
+  } else {
+    // Si no hay un usuario autenticado
+    notLoggedRoute();
+  }
 };

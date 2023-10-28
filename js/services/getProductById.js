@@ -8,10 +8,6 @@ import { getProducts } from "./getProducts.js";
 
 export const getProductById = (id) => {
   const products = getProducts();
-  for (const product of products) {
-    if (product.id === id) {
-      return product;
-    }
-  }
-  return null;
+  const product = products.find((product) => product.id === id);
+  return product;
 };

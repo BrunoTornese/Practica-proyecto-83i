@@ -1,24 +1,30 @@
-import { getProducts } from "./getProducts.js";
+import { getLoggedUser } from "./getLoggedUser.js";
 import { getCartProducts } from "./getCartProducts.js";
-import { renderCartBody } from "../cart.init.js";
 import { cartBadgeHandler } from "../utils/cartBadgeHandler.js";
+import { setCartProducts } from "./setCartProducts.js";
+import { getProductById } from "./getProductById.js";
 
-/**
- *
- * @param {*} id Recibe el id del producto a eliminar
- * @returns {} Elimina el producto del carrito
- */
 export const deleteProductFromCart = (id) => {
+  const user = getLoggedUser();
   const cartProducts = getCartProducts();
-  const productFoundInCart = cartProducts.find((product) => product.id == id);
-  const productFoundInCartIndex = cartProducts.findIndex(
-    (product) => product.id == id
-  );
-
-  if (productFoundInCart) {
-    cartProducts.splice(productFoundInCartIndex, 1);
-    localStorage.setItem("cart", JSON.stringify(cartProducts));
+  console.log("Productos en el carrito:", cartProducts);
+  if (user && cartProducts) {
+    const userId = user.id;
+    const product = getProductById(id);
+    console.log("Producto a eliminar:", product);
+    if (product) {
+      const updatedCartProducts = cartProducts.filter(
+        (cartProduct) => cartProduct.id !== id
+      );
+      console.log(
+        "Carrito después de eliminar el producto:",
+        updatedCartProducts
+      );
+      localStorage.setItem(`${userId}`, JSON.stringify(updatedCartProducts));
+      cartBadgeHandler(updatedCartProducts.length);
+      setCartProducts(userId, updatedCartProducts);
+      return updatedCartProducts;
+    }
   }
-
-  cartBadgeHandler();
+  return cartProducts;
 };
